@@ -9,10 +9,10 @@ on:
 env:
   CARGO_TERM_COLOR: always
 
-jobs:
-  rustfmt_check:
+job:
+  clippy_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run rustfmt
-        run: cargo fmt -- --check
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
