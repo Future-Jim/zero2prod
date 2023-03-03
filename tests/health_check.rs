@@ -16,7 +16,6 @@ async fn health_check_works() {
     assert_eq!(Some(0), response.content_length());
 }
 
-
 #[tokio::test]
 async fn subscribe_returns_a_200_for_valid_form_data() {
     let app_address = spawn_app();
@@ -30,7 +29,7 @@ async fn subscribe_returns_a_200_for_valid_form_data() {
         .body(body)
         .send()
         .await
-o        .expect("Failed to execute request.");
+        .expect("Failed to execute request.");
 
     assert_eq!(200, response.status().as_u16());
 }
@@ -62,6 +61,7 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
             error_message
         );
     }
+}
 
 fn spawn_app() -> String {
     let listener = TcpListener::bind("127.0.0.1:0").expect("Failed to bind random port");
@@ -69,5 +69,4 @@ fn spawn_app() -> String {
     let server = zero2prod::run(listener).expect("Failed to bind to address");
     tokio::spawn(server);
     format!("http://127.0.0.1:{}", port)
-
 }
