@@ -21,8 +21,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRESS_PASSWORD: password
           POSTGRES_DB: newsletter
-        ports:
-          - 5432:5432
+          POSTGRES_PORT: 5432
+        
 
     steps:
       - name: Check out repository code
@@ -48,7 +48,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install postgresql-client -y
 
       - name: Migrate database
-        run: SKIP_DOCKER=false ./scripts/init_db.sh
+        run: SKIP_DOCKER=true ./scripts/init_db.sh
 
       - name: Run tests
         run: cargo test
