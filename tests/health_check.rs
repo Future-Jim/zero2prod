@@ -76,6 +76,7 @@ async fn subscribe_returns_a_200_for_valid_form_data() {
         .body(body)
         .send()
         .await
+	
         .expect("Failed to execute request.");
     assert_eq!(200, response.status().as_u16());
 
